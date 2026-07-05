@@ -142,17 +142,22 @@ public class BukkitPlayerAdapter implements PlatformPlayerAdapter {
     }
 
     @Override
-    public @Nullable net.kyori.adventure.text.Component getDisplayName(@NonNull UUID uuid) {
+    public net.kyori.adventure.text.@Nullable Component getDisplayName(@NonNull UUID uuid) {
         Player player = Bukkit.getPlayer(uuid);
         if (player == null) return null;
         return player.displayName();
     }
 
     @Override
-    public @Nullable net.kyori.adventure.text.Component getPlayerListName(@NonNull UUID uuid) {
+    public net.kyori.adventure.text.@Nullable Component getPlayerListName(@NonNull UUID uuid) {
         Player player = Bukkit.getPlayer(uuid);
         if (player == null) return null;
-        return player.playerListName();
+        try {
+            java.lang.reflect.Method method = player.getClass().getMethod("playerListName");
+            return (net.kyori.adventure.text.Component) method.invoke(player);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

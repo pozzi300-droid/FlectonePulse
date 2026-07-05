@@ -2,8 +2,8 @@ dependencies {
     implementation project(":minecraft:common")
     implementation "net.flectone:libby-bukkit:$libby_version"
 
-    compileOnly project(":core")
-    compileOnly project(":minecraft:paper")
+    implementation project(":core")
+    implementation project(":minecraft:paper")
     compileOnly "com.github.Anon8281:UniversalScheduler:$UniversalScheduler_version"
     compileOnly "org.incendo:cloud-paper:$cloud_paper_version"
     compileOnly "org.spigotmc:spigot-api:$spigot_version"

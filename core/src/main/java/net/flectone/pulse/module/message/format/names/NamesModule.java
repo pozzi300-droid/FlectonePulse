@@ -161,6 +161,15 @@ public class NamesModule implements ModuleLocalization<Localization.Message.Form
                             return Tag.inserting(constants.get(constantIndex));
                         }),
                         messagePipeline.resolver(MessagePipeline.ReplacementTag.DISPLAY_NAME.getTagName(), (argumentQueue, _) -> {
+                            // Try to get Adventure Component from player.displayName() first
+                            if (sender instanceof FPlayer senderPlayer && !senderPlayer.isConsole() && !senderPlayer.isUnknown()) {
+                                net.kyori.adventure.text.Component adventureDisplayName = platformPlayerAdapter.getDisplayName(senderPlayer.uuid());
+                                if (adventureDisplayName != null) {
+                                    return Tag.selfClosingInserting(adventureDisplayName);
+                                }
+                            }
+
+                            // Fallback to YAML format
                             int displayNameIndex = 0;
                             if (argumentQueue.hasNext()) {
                                 displayNameIndex = argumentQueue.pop().asInt().orElse(0);

@@ -142,6 +142,20 @@ public class BukkitPlayerAdapter implements PlatformPlayerAdapter {
     }
 
     @Override
+    public @Nullable net.kyori.adventure.text.Component getDisplayName(@NonNull UUID uuid) {
+        Player player = Bukkit.getPlayer(uuid);
+        if (player == null) return null;
+        return player.displayName();
+    }
+
+    @Override
+    public @Nullable net.kyori.adventure.text.Component getPlayerListName(@NonNull UUID uuid) {
+        Player player = Bukkit.getPlayer(uuid);
+        if (player == null) return null;
+        return player.playerListName();
+    }
+
+    @Override
     public @NonNull String getWorldName(@NonNull UUID uuid) {
         Player player = Bukkit.getPlayer(uuid);
         return player != null ? player.getWorld().getName() : "";

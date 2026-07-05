@@ -137,6 +137,27 @@ public interface PlatformPlayerAdapter {
     @NonNull String getEntityTranslationKey(@Nullable Object platformPlayer);
 
     /**
+     * Gets the player display name as an Adventure Component.
+     * Returns the styled Component set via player.displayName(), not the legacy string.
+     *
+     * @param uuid the player UUID
+     * @return the display name component, or null if player is offline
+     */
+    default @Nullable Component getDisplayName(@NonNull UUID uuid) {
+        return null;
+    }
+
+    /**
+     * Gets the player list name as an Adventure Component.
+     *
+     * @param uuid the player UUID
+     * @return the player list name component, or null if player is offline
+     */
+    default @Nullable Component getPlayerListName(@NonNull UUID uuid) {
+        return null;
+    }
+
+    /**
      * Gets the player head texture properties.
      *
      * @param uuid the player UUID

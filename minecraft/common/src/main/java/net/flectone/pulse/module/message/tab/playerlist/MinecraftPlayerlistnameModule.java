@@ -245,6 +245,15 @@ public class MinecraftPlayerlistnameModule implements ModuleLocalization<Localiz
     }
 
     private Component buildFPlayerName(FPlayer fPlayer, FPlayer fReceiver) {
+        // Try to get Adventure Component from player.playerListName() first
+        if (!fPlayer.isConsole() && !fPlayer.isUnknown()) {
+            Component adventureListName = platformPlayerAdapter.getPlayerListName(fPlayer.uuid());
+            if (adventureListName != null) {
+                return adventureListName;
+            }
+        }
+
+        // Fallback to YAML format
         return messagePipeline.build(MessageContext.builder()
                 .sender(fPlayer)
                 .receiver(fReceiver)

@@ -25,7 +25,7 @@ jobs:
       - name: Build
         run: |
           chmod +x ./gradlew
-          ./gradlew :minecraft:bukkit:jar --no-daemon --configure-on-demand
+          ./gradlew :minecraft:bukkit:shadowJar --no-daemon --configure-on-demand
 
       - name: Find JAR
         run: find minecraft/bukkit/build/libs -name "*.jar" -type f

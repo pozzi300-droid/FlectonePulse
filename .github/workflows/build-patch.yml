@@ -25,14 +25,14 @@ jobs:
       - name: Build
         run: |
           chmod +x ./gradlew
-          ./gradlew :minecraft:bukkit:buildFinalJar --no-daemon --configure-on-demand
+          ./gradlew :minecraft:bukkit:jar --no-daemon --configure-on-demand
 
       - name: Find JAR
-        run: find build/libs -name "*.jar" -type f
+        run: find minecraft/bukkit/build/libs -name "*.jar" -type f
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: FlectonePulse-patched
-          path: build/libs/*.jar
+          path: minecraft/bukkit/build/libs/*.jar
           if-no-files-found: error

@@ -11,4 +11,5 @@ pluginManagement {
 
 include "core"
 include "minecraft:common"
+include "minecraft:paper"
 include "minecraft:bukkit"

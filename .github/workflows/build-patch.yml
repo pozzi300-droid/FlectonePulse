@@ -22,14 +22,17 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build Paper JAR
+      - name: Build
         run: |
           chmod +x ./gradlew
-          ./gradlew :minecraft:paper:buildFinalJar --no-daemon
+          ./gradlew :minecraft:bukkit:buildFinalJar --no-daemon
+
+      - name: Find JAR
+        run: find build/libs -name "*.jar" -type f
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: FlectonePulse-patched
-          path: minecraft/paper/build/libs/*.jar
+          path: build/libs/*.jar
           if-no-files-found: error
